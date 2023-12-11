@@ -1,10 +1,10 @@
 interface ICalculator {
   x: number;
   y: number;
-  additionNumber(): number;
-  substractinNumb(): number;
-  multNumbers(): number;
-  divisionNumbers(): number;
+  additionNumber(x: number, y: number): number;
+  substractinNumb(x: number, y: number): number;
+  multNumbers(x: number, y: number): number;
+  divisionNumbers(x: number, y: number): number;
 }
 
 const calculate = (param: ICalculator): number => {
@@ -12,20 +12,30 @@ const calculate = (param: ICalculator): number => {
 };
 
 interface Ibook {
-  name: string;
+  titel: string;
+  cost: number;
 }
 
-interface IAutor extends Ibook {
-  autor: string;
+interface IAutor {
+  firstname: string;
+  lastname: string;
 }
 
-interface IBookService extends IAutor {
-  getInformation(): string;
+interface IBookService {
+  book: Ibook;
+  autor: IAutor;
+  getInformation(book: Ibook, autor: IAutor): string;
 }
 
 const bookService: IBookService = {
-  name: "Harry Potter",
-  autor: "Goan Rolling",
+  book: {
+    titel: "Harry Potter",
+    cost: 100,
+  },
+  autor: {
+    firstname: "Goan",
+    lastname: "Rolling",
+  },
   getInformation: (): string =>
-    `book name ${bookService.name} autor ${bookService.autor}`,
+    `book name ${bookService.book.titel} autor ${bookService.autor.firstname} ${bookService.autor.lastname}`,
 };
