@@ -25,6 +25,7 @@ class Calculator implements ICalculator {
     return x * y;
   }
   public division(x: number, y: number): number {
+    if(y === 0) throw new Error ('Unexpected value')
     return x / y;
   }
 }
@@ -35,18 +36,7 @@ const calculate = (
   actions: ActionsCalculator,
   calc: ICalculator
 ): number => {
-  switch (actions) {
-    case "addition":
-      return calc.addition(x, y);
-    case "substraction":
-      return calc.substractin(x, y);
-    case "mult":
-      return calc.mult(x, y);
-    case "division":
-      return calc.division(x, y);
-    default:
-      throw new Error("Invalid action type");
-  }
+  return calc[actions](x,y) as number
 };
 
 interface IAutor {
